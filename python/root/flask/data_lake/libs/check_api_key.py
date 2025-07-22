@@ -4,7 +4,6 @@ def validate_key(endpoint = None, my_key = None, session_id = None):
     
     print(session_id + ':' + endpoint + ':Checking Key:', flush=True)
 
-    # {'api_key': '7e1ddfc85ae45a95330209c0834c59876011aa587be693354cbd1f40bf637fcd', 'description': 'Power BI', 'expiration_date': None, 'end_points': None}
     my_keys = api_keys.get_api_keys()
     for this_key in my_keys:
         if my_key == this_key['api_key']:
