@@ -3,33 +3,6 @@ import logging
 import sys
 from root.libs import DataTypeMap_Python_MySQL
 
-####### BIG NOTE HERE - 
-# This function ASSUME you are sending an DICT
-# and that dict is a flattend version of the JSON table (so it is table friendly)
-# ie - you got this from the api - 
-# {   "PagingInfo":   {
-#         "Bookmark":     "6606_6995",
-#         "HasMoreItems": false
-#     },
-#     "Items": [
-#         {   "Identifier":   "6972",
-#             "Name":         "Flamingo Literacy Coach Endorsement",
-#             "Code":         "prog_FLCE",
-#             "Type":
-#                 {   "Id":   101,
-#                     "Code": "Program","
-#                     "Name":"Program"
-#                 }
-#         },....
-#
-#  Then you sent a dict that looks like this using 
-# [ {'Identifier': '6740', 'Name': 'Flamingo Literacy Small Group Instruction', 'Code': 'ct_FLSGI', 'Type.Id': 2, 'Type.Code': 'Course Template', 'Type.Name': 'Course Template'}. .....]
-#
-# We send a big chunk of the JSON data to create_table_from_JSON.get_create_table
-# because we need to loop over a bunch of records to make sure we get cases where data exists.
-# ie - the first record might be blank for some values.
-# PRobably dont send ALL the data. that could get too large.  We'll play the percentages here and hope for the best.
-
 def get_create_table(json_data, table_name):
     from root.libs import localMySQLDB_connection
     from root import common_params
